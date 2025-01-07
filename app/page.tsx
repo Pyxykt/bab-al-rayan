@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
     <div className="items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 min-h-lvh font-[family-name:var(--font-geist-sans)]">
