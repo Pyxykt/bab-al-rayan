@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Image from 'next/image';
 
 const images = [
   {
@@ -35,7 +36,7 @@ const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);
@@ -59,8 +60,12 @@ const Home = () => {
         >
           {images.map((image, index) => (
             <div key={index} className="w-full h-full flex-shrink-0 relative">
-              <img src={image.src} alt={`Sliding Image ${index}`} className="w-full h-full object-cover" />
-
+              <Image
+                src={image.src}
+                alt={`Sliding Image ${index}`}
+                className="w-full h-full object-cover"
+                layout="fill"
+              />
               <div className="absolute inset-0 flex flex-col p-20 justify-center items-center text-white bg-black bg-opacity-40">
                 <h1 className="text-6xl p-8 font-bold">{image.title}</h1>
                 <p className="text-3xl font-bold mt-2">{image.detail}</p>
@@ -106,7 +111,6 @@ const Home = () => {
           </p>
         </div>
       </div>
-
     </>
   );
 };

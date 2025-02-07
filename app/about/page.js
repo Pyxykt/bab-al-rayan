@@ -1,13 +1,17 @@
+
 import React from 'react';
+import Image from 'next/image';
 
 const About = () => {
     return (
         <>
-            <div className="relative">
-                <img
+            <div className="relative" style={{ height: '500px' }}>
+                <Image
                     src="https://e1.pxfuel.com/desktop-wallpaper/829/345/desktop-wallpaper-media-resources-oil-refinery.jpg"
                     alt="Oil Refinery"
-                    style={{ width: '100%', height: 500, objectFit: 'cover' }}
+                    layout="fill"
+
+                    objectFit="cover"
                 />
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-7xl">
                     About Us
@@ -18,9 +22,11 @@ const About = () => {
             </h1>
             <div className="flex flex-col md:flex-row justify-center items-stretch gap-6 p-20 bg-black text-white">
                 <div className="max-w-sm w-full bg-gray-800 p-4 rounded-lg shadow-lg text-center flex flex-col h-full flex-1 transform transition-transform duration-300 hover:scale-105">
-                    <img
+                    <Image
                         src="https://img.freepik.com/premium-vector/futuristic-mission-concept-arrow-darts-target-glowing-symbols-text-technology-abstract_726113-365.jpg?semt=ais_hybrid"
                         alt="Mission"
+                        width={500}
+                        height={200}
                         className="w-full h-48 object-cover rounded-md"
                     />
                     <h2 className="text-2xl font-bold mt-4">Mission</h2>
@@ -29,10 +35,12 @@ const About = () => {
                 </div>
 
                 <div className="max-w-sm w-full bg-gray-800 p-4 rounded-lg shadow-lg text-center flex flex-col h-full flex-1 transform transition-transform duration-300 hover:scale-105">
-                    <img
+                    <Image
                         src="https://viso.ai/wp-content/smush-webp/2023/01/AI-and-computer-vision-in-oil-and-gas-1060x606.jpg.webp"
                         alt="Vision"
-                        className="w-full h-48 object-cover rounded-md"
+                        width={500}
+                        height={200}
+                        className="w-full h-full object-cover rounded-md"
                     />
                     <h2 className="text-2xl font-bold mt-4">Vision</h2>
                     <p className="mt-2 flex-grow text-justify">To be the preferred partner in the diesel industry, setting standards for innovation, sustainability, and customer satisfaction.</p>
@@ -40,9 +48,11 @@ const About = () => {
                 </div>
 
                 <div className="max-w-sm w-full bg-gray-800 p-4 rounded-lg shadow-lg text-center flex flex-col h-full flex-1 transform transition-transform duration-300 hover:scale-105">
-                    <img
+                    <Image
                         src="https://www.synergita.com/blog/wp-content/uploads/2019/06/core-values.jpg"
                         alt="Core Values"
+                        width={500}
+                        height={200}
                         className="w-full h-48 object-cover rounded-md"
                     />
                     <h2 className="text-2xl font-bold mt-4">Core Values</h2>
@@ -56,15 +66,8 @@ const About = () => {
                 </div>
 
             </div>
-
         </>
     );
 };
 
 export default About;
-
-
-
-
-
-

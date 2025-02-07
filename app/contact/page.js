@@ -1,13 +1,14 @@
 import React from "react";
-
+import Image from "next/image";
 const Contact = () => {
     return (
         <>
-            <div className="relative">
-                <img
+            <div className="relative" style={{ height: '500px' }}>
+                <Image
                     src="https://e1.pxfuel.com/desktop-wallpaper/829/345/desktop-wallpaper-media-resources-oil-refinery.jpg"
                     alt="Oil Refinery"
-                    className="w-full h-[500px] object-cover"
+                    layout="fill"
+                    objectFit="cover"
                 />
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-7xl">
                     Contact
@@ -27,8 +28,8 @@ const Contact = () => {
                 <div className="flex-7 min-w-[48%]">
                     <div className="bg-gray-100 p-5 rounded-lg shadow-lg flex flex-col gap-5 text-xl font-bold text-gray-800">
                         <p>📍 Address: H.676, Murat Birag, Shad-Al-Rak, Dubai</p>
-                        <p>✉️ Email: contact@example.com</p>
-                        <p>📞 Phone: +971 123 456 789</p>
+                        <p>✉️ Email: babalrayandiesel@gmail.com</p>
+                        <p>📞 Phone: +971 508200464</p>
                         <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                     </div>
                 </div>
