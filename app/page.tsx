@@ -5,7 +5,7 @@ const images = [
   {
     src: "https://assets.upstox.com/content/assets/images/cms/202461/refinery-3613526_1280.webp",
     title: "Ser 1",
-    detail: "Ser1 Detail nnkjnkjnjk jknjnjnj jnjnmnmnm,nm,  bcfgcxfgcfcfx bhjv",
+    detail: "Ser1 Detail Ser1 Detail Ser1 Detail Ser1 Detail ",
   },
   {
     src: "https://c1.wallpaperflare.com/preview/567/692/968/industry-industrial-fabric-chimneys.jpg",
@@ -35,10 +35,20 @@ const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 1600);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
+
+  const goToNextImage = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const goToPreviousImage = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    );
+  };
 
   return (
     <>
@@ -58,6 +68,18 @@ const Home = () => {
             </div>
           ))}
         </div>
+        <button
+          onClick={goToPreviousImage}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-4xl z-10"
+        >
+          &#10094;
+        </button>
+        <button
+          onClick={goToNextImage}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-4xl z-10"
+        >
+          &#10095;
+        </button>
       </div>
       <div className="bg-black text-white py-20 px-6 flex justify-center ">
         <div className="max-w-4xl w-full px-4 sm:px-6 lg:px-8">
