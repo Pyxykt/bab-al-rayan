@@ -18,7 +18,7 @@ const About = () => {
                 </div>
             </div>
             <h1 className="text-4xl font-bold text-center pt-[3.9rem] w-full bg-black text-white">
-                We always meet our customer's demands and often surpass them.
+                We always meet our customer&apos;s demands and often surpass them.
             </h1>
             <div className="flex flex-col md:flex-row justify-center items-stretch gap-6 p-20 bg-black text-white">
                 <div className="max-w-sm w-full bg-gray-800 p-4 rounded-lg shadow-lg text-center flex flex-col h-full flex-1 transform transition-transform duration-300 hover:scale-105">
