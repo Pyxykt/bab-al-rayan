@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "./header";
 import Footer from "./footer";
+import CustomCursor from "../components/ui/cursor";
+import WelcomePage from "../components/ui/welcomePage";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,9 +33,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <WelcomePage />
+        <CustomCursor />
+
         <Header />
+
         {children}
         <Footer />
+
       </body>
     </html>
   );

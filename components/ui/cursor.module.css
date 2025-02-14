@@ -1,0 +1,49 @@
+.cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    border: 4px solid #999999;
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease-out;
+    z-index: 9999;
+}
+
+.cursor p {
+    color: white;
+    font-size: 12px;
+    text-align: center;
+}
+
+.loader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 4px solid transparent;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.center-first {
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+}
+
+.cursor-blur-hover:hover {
+    cursor: none;
+
+}
+
+/* cursor.module.css */
+.eyeGif {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}

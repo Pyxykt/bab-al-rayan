@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const product = () => {
     return (
-        <div className="relative z-10" style={{ height: '500px' }}>
+        <div className="relative " style={{ height: '500px' }}>
             <Image
                 src="https://e1.pxfuel.com/desktop-wallpaper/829/345/desktop-wallpaper-media-resources-oil-refinery.jpg"
                 alt="Oil Refinery"
