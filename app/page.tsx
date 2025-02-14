@@ -68,7 +68,7 @@ export default function Home() {
         { opacity: 0.8, y: 0, duration: 1, ease: "power3.out" }
       );
 
-      let timeline = gsap.timeline({ delay: 0.1 });
+      const timeline = gsap.timeline({ delay: 0.1 });
 
       for (let i = 0; i <= sloganText.length; i++) {
         timeline.to(sloganRef.current, {
@@ -156,7 +156,7 @@ export default function Home() {
 
     document.querySelectorAll(".reveal").forEach((text) => {
       if (text instanceof HTMLElement) {
-        let splitText = new SplitType(text, { types: "words" });
+        const splitText = new SplitType(text, { types: "words" });
         const section = text.closest("section");
 
         gsap.from(splitText.words, {
