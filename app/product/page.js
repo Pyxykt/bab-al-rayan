@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from "gsap";
-import "../styles/contact.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -9,18 +8,12 @@ gsap.registerPlugin(ScrollTrigger);
 const product = () => {
 
     const textRef = useRef(null);
-    const sloganRef = useRef(null);
-    const sloganText = "We always meet our customers <br /> demands and often surpass them.";
-    const characters = "abcdefghijklmnopqrstuvwxyz";
+
+
+
     const [showButton, setShowButton] = useState(true);
-    const contactRefs = useRef([]);
-    const scrambleText = (original, length) => {
-        let scrambled = "";
-        for (let i = 0; i < length; i++) {
-            scrambled += characters[Math.floor(Math.random() * characters.length)];
-        }
-        return scrambled;
-    };
+
+
 
     const scrollDown = () => {
         window.scrollTo({
@@ -45,53 +38,13 @@ const product = () => {
                 { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
             );
 
-            gsap.fromTo(
-                sloganRef.current,
-                { opacity: 0, y: 200 },
-                { opacity: 0.8, y: 0, duration: 1, ease: "power3.out" }
-            );
-
-            const timeline = gsap.timeline({ delay: 0.1 });
-
-            for (let i = 0; i <= sloganText.length; i++) {
-                timeline.to(sloganRef.current, {
-                    textContent: scrambleText(sloganText, i),
-                    duration: .02,
-                    ease: "none",
-                });
-            }
-
-            timeline.to(sloganRef.current, {
-                onUpdate: function () {
-                    if (sloganRef.current) {
-                        sloganRef.current.innerHTML = sloganText;
-                    }
-                },
-                duration: 0.1,
-                ease: "power2.out",
-            });
 
         }, 2);
 
         return () => clearTimeout(timeout);
     }, []);
     //rit left 
-    useEffect(() => {
-        gsap.fromTo(
-            contactRefs.current,
-            { opacity: 0, x: (i) => (i % 2 === 0 ? 1000 : -1000) },
-            {
-                opacity: 1,
-                x: 0,
-                duration: 1,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: ".container1",
-                    start: "top 80%",
-                }
-            }
-        );
-    }, []);
+
 
 
 
