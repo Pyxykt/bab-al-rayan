@@ -10,7 +10,9 @@ const nextConfig = {
             'images.pexels.com',
             'img.freepik.com',
             'viso.ai',
-            'www.synergita.com'
+            'www.synergita.com',
+            'images.unsplash.com',
+            'www.solidbackgrounds.com'
         ],
     },
 };

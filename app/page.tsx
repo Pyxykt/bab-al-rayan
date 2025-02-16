@@ -147,7 +147,7 @@ export default function Home() {
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  //text scrmbl
+  //text reveal
   useEffect(() => {
     const lenis = new Lenis({ lerp: 0.07, });
 
@@ -163,14 +163,14 @@ export default function Home() {
           opacity: 0,
           y: isMobile ? 10 : 20,
           ease: "power2.out",
-          stagger: isMobile ? 0.05 : 0.1,
-          duration: 1,
+          stagger: isMobile ? 0.05 : 1,
+          duration: 5,
           scrollTrigger: {
             trigger: section,
-            start: isMobile ? "top 8%" : "top -62%",
-            end: isMobile ? "bottom center" : `+=${window.innerHeight * 0.9}px`,
+            start: isMobile ? "top 8%" : "top top",
+            end: isMobile ? "bottom center" : `+=${window.innerHeight * 5}px`,
             scrub: true,
-            pin: !isMobile,
+            pin: true,
           },
         });
       }
@@ -250,15 +250,17 @@ export default function Home() {
 
 
         <div className="w-full mt-20 text-center text-lg sm:text-xl md:text-2xl lg:text-2xl opacity-1 bg-white text-black rounded-lg ">
-          <p className="p-[5rem] pt-[0rem] reveal">
+          <section className="flex items-center justify-center min-h-auto">
+            <p className="p-[5rem]  pb-[0rem] pt-[7rem] reveal">
 
-            <strong>BAB AL RAYAN DIESEL FUEL TRADING L.L.C</strong> is a trusted leader in the supply and distribution of high-quality diesel fuel and related products.
-            With a strong commitment to providing reliable fuel solutions, we serve a broad range of industries, including transportation, construction, agriculture, and power generation.
-            We specialize in delivering diesel fuel to commercial fleets, industrial clients, and retail customers while ensuring consistent product quality and efficient delivery.
-            <br /><br /><br />
-            With a robust supply chain, state-of-the-art storage facilities, and a dedicated team of professionals, we ensure that our customers have access to the fuel they need, when they need it.
-            As a customer-centric company, we are committed to delivering tailored solutions that meet the specific needs of each client, while prioritizing safety, reliability, and environmental sustainability.
-          </p>
+              <strong>BAB AL RAYAN DIESEL FUEL TRADING L.L.C</strong> is a trusted leader in the supply and distribution of high-quality diesel fuel and related products.
+              With a strong commitment to providing reliable fuel solutions, we serve a broad range of industries, including transportation, construction, agriculture, and power generation.
+              We specialize in delivering diesel fuel to commercial fleets, industrial clients, and retail customers while ensuring consistent product quality and efficient delivery.
+              <br /><br />
+              With a robust supply chain, state-of-the-art storage facilities, and a dedicated team of professionals, we ensure that our customers have access to the fuel they need, when they need it.
+              As a customer-centric company, we are committed to delivering tailored solutions that meet the specific needs of each client, while prioritizing safety, reliability, and environmental sustainability.
+            </p>
+          </section>
         </div>
       </div>
 

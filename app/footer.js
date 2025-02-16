@@ -1,45 +1,96 @@
-"use client";
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
-import styles from "./footer.module.css";
-import logo from "./companylogo.png";
+'use client';
+import { useEffect } from 'react';
+import feather from 'feather-icons';
+import './styles/footer.css';
 
 const Footer = () => {
+    useEffect(() => {
+        feather.replace();
+    }, []);
+
     return (
-        <footer className={styles.footer}>
-
-            <div className={styles.logoContainer}>
-                <Image src={logo} alt="Company Logo" width={150} height={50} />
+        <footer className="footer">
+            <div className="footer__parralax">
+                <div className="footer__parralax-trees" />
+                <div className="footer__parralax-moto" />
+                <div className="footer__parralax-secondplan" />
+                <div className="footer__parralax-premierplan" />
+                <div className="footer__parralax-voiture" />
             </div>
+            <div className="container">
+                <div className="footer__columns">
+                    <div className="footer__col">
+                        <h3 className="footer__col-title">
 
+                            <span>Your enquiry</span>
+                        </h3>
+                        <nav className="footer__nav">
+                            <form className="footer__form">
+                                <ul className="footer__nav-list">
+                                    <li className="footer__nav-item">
+                                        <input
+                                            type="email"
+                                            placeholder="Your Mail"
+                                            className="footer__input"
+                                            required
+                                        />
+                                    </li>
+                                    <li className="footer__nav-item">
+                                        <textarea
+                                            placeholder="Enquiry"
+                                            className="footer__input footer__textarea"
+                                            required
+                                        ></textarea>
+                                    </li>
+                                    <li className="footer__nav-item">
+                                        <button type="submit" className="footer__submit">
+                                            Submit
+                                        </button>
+                                    </li>
+                                </ul>
+                            </form>
+                        </nav>
+                    </div>
+                    <div className="footer__col">
+                        <h3 className="footer__col-title">
+                            <span>Socials</span>
+                        </h3>
+                        <nav className="footer__nav">
+                            <ul className="footer__nav-list">
+                                <li className="footer__nav-item">
+                                    <a href="" className="footer__nav-link cursor-blur-hover">
+                                        <i data-feather="youtube" />
+                                        <span>Youtube</span>
+                                    </a>
+                                </li>
+                                <li className="footer__nav-item">
+                                    <a href="" className="footer__nav-link cursor-blur-hover">
+                                        <i data-feather="facebook" />
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li className="footer__nav-item">
+                                    <a href="" className="footer__nav-link cursor-blur-hover">
+                                        <i data-feather="instagram" />
+                                        <span>Instagram</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
 
-            <div className={styles.enquiryForm}>
-                <h2>Enquiry</h2>
-                <form>
-                    <input type="email" placeholder="Email" required />
-                    <textarea placeholder="Enquiry" required></textarea>
-                    <button type="submit">Send</button>
-                </form>
-            </div>
-
-
-            <div className={styles.socialLinks}>
-                <Link href="https://facebook.com" target="_blank">
-                    <FaFacebook />
-                </Link>
-                <Link href="https://instagram.com" target="_blank">
-                    <FaInstagram />
-                </Link>
-                <Link href="https://linkedin.com" target="_blank">
-                    <FaLinkedin />
-                </Link>
-                <Link href="https://twitter.com" target="_blank">
-                    <FaTwitter />
-                </Link>
+                </div>
+                <div className="footer__copyrights">
+                    <p>
+                        {" "}
+                        <a href="" target="_blank">
+                            @Bab-Al-Rayan
+                        </a>
+                    </p>
+                </div>
             </div>
         </footer>
+
     );
 };
 

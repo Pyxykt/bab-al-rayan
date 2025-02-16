@@ -1,73 +1,234 @@
-
-import React from 'react';
+"use client";
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { gsap } from "gsap";
+import "../styles/about.css";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
+    const textRef = useRef(null);
+    const sloganRef = useRef(null);
+    const sloganText = "We always meet our customers <br /> demands and often surpass them.";
+    const characters = "abcdefghijklmnopqrstuvwxyz";
+    const [showButton, setShowButton] = useState(true);
+
+    const scrambleText = (original, length) => {
+        let scrambled = "";
+        for (let i = 0; i < length; i++) {
+            scrambled += characters[Math.floor(Math.random() * characters.length)];
+        }
+        return scrambled;
+    };
+
+    const scrollDown = () => {
+        window.scrollTo({
+            top: window.innerHeight,
+            behavior: "smooth",
+        });
+    };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowButton(window.scrollY <= 50);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            gsap.fromTo(
+                textRef.current,
+                { opacity: 0, y: 200 },
+                { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+            );
+
+            gsap.fromTo(
+                sloganRef.current,
+                { opacity: 0, y: 200 },
+                { opacity: 0.8, y: 0, duration: 1, ease: "power3.out" }
+            );
+
+            const timeline = gsap.timeline({ delay: 0.1 });
+
+            for (let i = 0; i <= sloganText.length; i++) {
+                timeline.to(sloganRef.current, {
+                    textContent: scrambleText(sloganText, i),
+                    duration: .02,
+                    ease: "none",
+                });
+            }
+
+            timeline.to(sloganRef.current, {
+                onUpdate: function () {
+                    if (sloganRef.current) {
+                        sloganRef.current.innerHTML = sloganText;
+                    }
+                },
+                duration: 0.1,
+                ease: "power2.out",
+            });
+
+        }, 2);
+
+        return () => clearTimeout(timeout);
+    }, []);
+
+    useEffect(() => {
+        gsap.utils.toArray(".reveal").forEach((containerA) => {
+            let image = containerA.querySelector("img");
+
+            gsap.set(containerA, { autoAlpha: 0, xPercent: -50 });
+            gsap.set(image, { xPercent: 50, scale: 1.3 });
+
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: containerA,
+                    start: "top 80%",
+                    toggleActions: "play none none reset",
+                },
+            })
+                .to(containerA, { autoAlpha: 1, xPercent: 0, duration: 1.2, ease: "power2.out" })
+                .to(image, { xPercent: 0, scale: 1, duration: 1.2, ease: "power2.out" }, "-=1.2");
+        });
+    }, []);
+
     return (
         <>
-            <div className="relative" style={{ height: '500px' }}>
-                <Image
-                    src="https://e1.pxfuel.com/desktop-wallpaper/829/345/desktop-wallpaper-media-resources-oil-refinery.jpg"
-                    alt="Oil Refinery"
-                    layout="fill"
+            <div className="flex items-center justify-center w-full bg-white text-black px-2 pt-[14rem] pb-[2rem]">
+                <h1 ref={textRef} className="text-5xl sm:text-5xl md:text-8xl lg:text-[150px] font-bold opacity-0 text-center cursor-blur-hover">
+                    About us
+                </h1>
+            </div>
+            <div ref={sloganRef} className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-light text-center pb-[12rem] opacity-0">
+                We always meet our customers <br /> demands and often surpass them.
+            </div>
 
-                    objectFit="cover"
-                />
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-7xl">
-                    About Us
+            <div className="containerA">
+                <div className="reveal">
+                    <Image
+                        src="https://www.solidbackgrounds.com/images/1920x1080/1920x1080-black-solid-color-background.jpg" alt="Mission"
+                        width={1920}
+                        height={1080}
+
+                    />
+                    <p className="overlay-text">
+                        <span id="mission-text" className="text-4xl text-center flex flex-col items-center justify-center">MISSION
+
+                        </span>
+
+                        <br />To provide high-quality diesel products and services that enable our
+                        customers to operate more efficiently, reduce environmental impact, and
+                        maintain their competitive edge in the global marketplace</p>
                 </div>
             </div>
-            <h1 className="text-4xl font-bold text-center pt-[3.9rem] w-full bg-black text-white">
-                We always meet our customer&apos;s demands and often surpass them.
-            </h1>
-            <div className="flex flex-col md:flex-row justify-center items-stretch gap-6 p-20 bg-black text-white">
-                <div className="max-w-sm w-full bg-gray-800 p-4 rounded-lg shadow-lg text-center flex flex-col h-full flex-1 transform transition-transform duration-300 hover:scale-105">
-                    <Image
-                        src="https://img.freepik.com/premium-vector/futuristic-mission-concept-arrow-darts-target-glowing-symbols-text-technology-abstract_726113-365.jpg?semt=ais_hybrid"
-                        alt="Mission"
-                        width={500}
-                        height={200}
-                        className="w-full h-48 object-cover rounded-md"
-                    />
-                    <h2 className="text-2xl font-bold mt-4">Mission</h2>
-                    <p className="mt-2 flex-grow text-justify">To provide high-quality diesel products and services that enable our customers to operate more efficiently, reduce environmental impact, and maintain their competitive edge in the global marketplace.</p>
-                    <br /><br /><br /><br /><br />
-                </div>
 
-                <div className="max-w-sm w-full bg-gray-800 p-4 rounded-lg shadow-lg text-center flex flex-col h-full flex-1 transform transition-transform duration-300 hover:scale-105">
+            <div className="containerA">
+                <div className="reveal">
                     <Image
-                        src="https://viso.ai/wp-content/smush-webp/2023/01/AI-and-computer-vision-in-oil-and-gas-1060x606.jpg.webp"
-                        alt="Vision"
-                        width={500}
-                        height={200}
-                        className="w-full h-full object-cover rounded-md"
-                    />
-                    <h2 className="text-2xl font-bold mt-4">Vision</h2>
-                    <p className="mt-2 flex-grow text-justify">To be the preferred partner in the diesel industry, setting standards for innovation, sustainability, and customer satisfaction.</p>
-                    <br /><br /><br /><br /><br /><br /><br />
-                </div>
+                        src="https://www.solidbackgrounds.com/images/1920x1080/1920x1080-black-solid-color-background.jpg" alt="Mission"
+                        width={1920}
+                        height={1080}
 
-                <div className="max-w-sm w-full bg-gray-800 p-4 rounded-lg shadow-lg text-center flex flex-col h-full flex-1 transform transition-transform duration-300 hover:scale-105">
-                    <Image
-                        src="https://www.synergita.com/blog/wp-content/uploads/2019/06/core-values.jpg"
-                        alt="Core Values"
-                        width={500}
-                        height={200}
-                        className="w-full h-48 object-cover rounded-md"
                     />
-                    <h2 className="text-2xl font-bold mt-4">Core Values</h2>
-                    <ul className="mt-2 text-left px-4 list-disc flex-grow text-justify">
-                        <li><strong>Innovation:</strong> Advancing our products through technology and research.</li>
-                        <li><strong>Reliability:</strong> Delivering consistent, high-performance solutions.</li>
-                        <li><strong>Sustainability:</strong> Promoting eco-friendly practices.</li>
-                        <li><strong>Customer-Centric:</strong> Tailoring solutions to customer needs.</li>
-                        <li><strong>Integrity:</strong> Upholding ethical standards in all dealings.</li>
-                    </ul>
+                    <p className="overlay-text">
+                        <span className="text-4xl text-center flex flex-col items-center justify-center">VISION</span>
+                        <br />
+                        To be the preferred partner in the diesel industry, setting standards for
+                        innovation, sustainability, and customer satisfaction. </p>
+                    <br />
                 </div>
-
             </div>
+
+            <div className="containerA">
+                <div className="reveal">
+                    <Image
+                        src="https://www.solidbackgrounds.com/images/1920x1080/1920x1080-black-solid-color-background.jpg" alt="Mission"
+                        width={1920}
+                        height={1080}
+
+                    />
+                    <p className="overlay-text">
+                        <span className="text-4xl text-center flex flex-col items-center justify-center">CORE VALUES</span><br />
+                        <span className="text-lg md:text-xl lg:text-2xl max-w-xl md:max-w-2xl lg:max-w-8xl">
+                            <span className="">Innovation:</span> Constantly advancing our product offerings through technology and research. <br />
+                            <span className="font-semibold">Reliability:</span> Delivering consistent, high-performance solutions. <br />
+                            <span className="font-semibold">Sustainability:</span> Promoting eco-friendly practices and reducing carbon footprints. <br />
+                            <span className="font-semibold">Customer-Centric:</span> Focusing on the needs of our customers through tailored solutions. <br />
+                            <span className="font-semibold">Integrity:</span> Upholding the highest standards of ethics in all our business dealings.
+                        </span>
+                    </p>
+
+                </div>
+            </div>
+
+            <div className="pb-[20rem]"></div>
+            {showButton && (
+                <button
+                    onClick={scrollDown}
+                    className="fixed bottom-4 left-4 bg-black text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-800 transition-opacity duration-600"
+                >
+                    ↓ Scroll Down
+                </button>
+            )}
         </>
     );
 };
 
 export default About;
+
+
+
+
+// //____________________________________
+// "use client";
+// import { useEffect } from "react";
+// import gsap from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import "../styles/about.css";
+// gsap.registerPlugin(ScrollTrigger);
+
+// export default function About() {
+//     useEffect(() => {
+//         gsap.utils.toArray(".reveal").forEach((containerA) => {
+//             let image = containerA.querySelector("img");
+
+//             gsap.set(containerA, { autoAlpha: 0, xPercent: -50 });
+//             gsap.set(image, { xPercent: 50, scale: 1.3 });
+
+//             gsap.timeline({
+//                 scrollTrigger: {
+//                     trigger: containerA,
+//                     start: "top 80%",
+//                     toggleActions: "play none none reset",
+//                 },
+//             })
+//                 .to(containerA, { autoAlpha: 1, xPercent: 0, duration: 1.2, ease: "power2.out" })
+//                 .to(image, { xPercent: 0, scale: 1, duration: 1.2, ease: "power2.out" }, "-=1.2");
+//         });
+//     }, []);
+
+//     return (
+//         <>
+//             {[
+//                 "https://images.unsplash.com/photo-1526413232644-8a40f03cc03b?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+//                 "https://images.unsplash.com/photo-1505201372024-aedc618d47c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+//                 "https://images.unsplash.com/photo-1531727991582-cfd25ce79613?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+//                 "https://images.unsplash.com/photo-1580215935060-a5adc57c5157?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+//             ].map((src, index) => (
+//                 <div className="containerA" key={index}>
+//                     <div className="reveal">
+//                         <img src={src} alt={`image-${index}`} />
+//                     </div>
+//                 </div>
+//             ))}
+//             <div className="credit">
+//                 <a href="https://thisisadvantage.com" target="_blank">
+//                     Made by Advantage
+//                 </a>
+//             </div>
+//         </>
+//     );
+// }
