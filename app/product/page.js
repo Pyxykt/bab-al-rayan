@@ -1,19 +1,15 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from "gsap";
+import "../styles/contact.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const product = () => {
-
+const Product = () => {
     const textRef = useRef(null);
-
-
-
     const [showButton, setShowButton] = useState(true);
-
-
+    const contactRefs = useRef([]);
 
     const scrollDown = () => {
         window.scrollTo({
@@ -31,34 +27,39 @@ const product = () => {
     }, []);
 
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            gsap.fromTo(
-                textRef.current,
-                { opacity: 0, y: 200 },
-                { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
-            );
-
-
-        }, 2);
-
-        return () => clearTimeout(timeout);
+        gsap.fromTo(
+            textRef.current,
+            { opacity: 0, y: 200 },
+            { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+        );
     }, []);
-    //rit left 
 
-
-
+    useEffect(() => {
+        gsap.fromTo(
+            contactRefs.current,
+            { opacity: 0, x: (i) => (i % 2 === 0 ? 1000 : -1000) },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".container1",
+                    start: "top 80%",
+                }
+            }
+        );
+    }, []);
 
     return (
         <>
             <div className="flex items-center justify-center w-full bg-white text-black px-2 pt-[14rem] pb-[2rem]">
                 <h1 ref={textRef} className="text-5xl sm:text-5xl md:text-8xl lg:text-[150px] font-bold opacity-0 text-center cursor-blur-hover">
-                    product page
+                    Product Page
                 </h1>
             </div>
 
-
-
-            <div className="pb-[8rem]"></div>
+            <div className="pb-[4rem]"></div>
             {showButton && (
                 <button
                     onClick={scrollDown}
@@ -71,4 +72,4 @@ const product = () => {
     );
 };
 
-export default product;
+export default Product;
