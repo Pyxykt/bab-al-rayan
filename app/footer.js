@@ -21,6 +21,10 @@ const Footer = () => {
         return () => window.removeEventListener("resize", checkScreenSize);
     }, []);
 
+    useEffect(() => {
+
+    }, [isMobile])
+
     const [formData, setFormData] = useState({
         email: "",
         message: ""

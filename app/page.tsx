@@ -28,7 +28,7 @@
 // ];
 
 "use client";
-import { useEffect, useRef, useState, useLayoutEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -174,7 +174,7 @@ export default function Home() {
           y: isMobile ? 10 : 20,
           ease: "power2.out",
           stagger: isMobile ? 0.05 : 1,
-          duration: 5,
+          duration: 4,
           scrollTrigger: {
             trigger: section,
             start: isMobile ? "top 8%" : "top top",
@@ -189,7 +189,8 @@ export default function Home() {
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, [isMobile])
+  }, [isMobile]);
+
 
 
   const scrollDown = () => {
@@ -261,7 +262,7 @@ export default function Home() {
 
         <div className="w-full mt-20 text-center text-lg sm:text-xl md:text-2xl lg:text-2xl opacity-1 bg-white text-black rounded-lg ">
           <section className="flex items-center justify-center min-h-auto">
-            <p className="p-[5rem]  pb-[0rem] pt-[7rem] reveal">
+            <p className="p-[5rem]  pb-[0rem] pt-[7rem] reveal ">
 
               <strong>BAB AL RAYAN DIESEL FUEL TRADING L.L.C</strong> is a trusted leader in the supply and distribution of high-quality diesel fuel and related products.
               With a strong commitment to providing reliable fuel solutions, we serve a broad range of industries, including transportation, construction, agriculture, and power generation.
