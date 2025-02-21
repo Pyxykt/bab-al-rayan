@@ -22,9 +22,50 @@ const About = () => {
         return scrambled;
     };
 
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        message: ""
+    });
+
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeIN06PgfaGX3nnT3YPEGH1BRbgyaoyRCHtkKJPyl8ylQ2Idg/formResponse";
+
+        const formDataGoogle = new FormData();
+        formDataGoogle.append("entry.2005620554", formData.name);
+        formDataGoogle.append("entry.1045781291", formData.email);
+        formDataGoogle.append("entry.1166974658", formData.phone);
+        formDataGoogle.append("entry.839337160", formData.message);
+
+        try {
+            await fetch(formUrl, {
+                method: "POST",
+                body: formDataGoogle,
+                mode: "no-cors",
+            });
+            setFormData({
+                name: "",
+                email: "",
+                phone: "",
+                message: ""
+            });
+            alert("Message sent successfully!");
+        } catch (error) {
+            console.error("Error sending message:", error);
+        }
+    };
+
     const scrollDown = () => {
         window.scrollTo({
-            top: window.innerHeight,
+            top: window.innerHeight * 0.6,
             behavior: "smooth",
         });
     };
@@ -104,8 +145,8 @@ const About = () => {
             </div>
 
             <div className="flex items-center justify-center w-full bg-white text-black px-2 pt-[10rem] pb-[2rem]">
-                <form className="login-form">
-                    <h1 className='text-4xl'>Message Me</h1>
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <h1 className="text-4xl">Message Me</h1>
 
                     <div className="form-input-material">
                         <input
@@ -115,10 +156,13 @@ const About = () => {
                             placeholder=" "
                             autoComplete="off"
                             className="form-control-material"
-                            required=""
+                            required
+                            value={formData.name}
+                            onChange={handleChange}
                         />
                         <label htmlFor="name">Name</label>
                     </div>
+
                     <div className="form-input-material">
                         <input
                             type="email"
@@ -127,10 +171,13 @@ const About = () => {
                             placeholder=" "
                             autoComplete="off"
                             className="form-control-material"
-                            required=""
+                            required
+                            value={formData.email}
+                            onChange={handleChange}
                         />
                         <label htmlFor="email">Email</label>
                     </div>
+
                     <div className="form-input-material">
                         <input
                             type="tel"
@@ -139,10 +186,13 @@ const About = () => {
                             placeholder=" "
                             autoComplete="off"
                             className="form-control-material"
-                            required=""
+                            required
+                            value={formData.phone}
+                            onChange={handleChange}
                         />
                         <label htmlFor="phone">Phone</label>
                     </div>
+
                     <div className="form-input-material">
                         <textarea
                             name="message"
@@ -150,11 +200,13 @@ const About = () => {
                             placeholder=" "
                             autoComplete="off"
                             className="form-control-material"
-                            required=""
-                            defaultValue={""}
+                            required
+                            value={formData.message}
+                            onChange={handleChange}
                         />
                         <label htmlFor="message">Message</label>
                     </div>
+
                     <button type="submit" className="btn btn-primary btn-ghost">
                         Send Message
                     </button>
@@ -166,7 +218,7 @@ const About = () => {
                 CONTACT INFO
             </div>
 
-            <div className=" flex items-center justify-center w-full bg-white text-black px-2 pt-[2rem] pb-[10rem] sm:pb-[6rem] md:pb-[4rem] lg:pb-[2rem] xl:pb-0">
+            <div className=" flex items-center justify-center w-full bg-white text-black px-2 pt-[2rem] pb-[2rem] sm:pb-[2rem] md:pb-[2rem] lg:pb-[2rem] xl:pb-[2rem]">
                 <div className="container1">
                     <p ref={(el) => contactRefs.current[0] = el} className="slide-right">
                         📍 Address: H.676, Murat Birag, Shad-Al-Rak, Dubai

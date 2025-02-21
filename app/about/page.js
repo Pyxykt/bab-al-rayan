@@ -24,7 +24,7 @@ const About = () => {
 
     const scrollDown = () => {
         window.scrollTo({
-            top: window.innerHeight,
+            top: window.innerHeight * 0.9,
             behavior: "smooth",
         });
     };

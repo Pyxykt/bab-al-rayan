@@ -128,7 +128,7 @@ const Header = () => {
             });
             clearInterval(interval);
         };
-    }, []);
+    }, [isMobile]);
 
 
 

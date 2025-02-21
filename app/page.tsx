@@ -53,8 +53,11 @@ export default function Home() {
     }
     return scrambled;
   };
-
+  //textref sloganref
   useEffect(() => {
+    const isVisit = localStorage.getItem("isVisit") === "true";
+    const delay = isVisit ? 0 : 2000; // 10 sec if visited before, else 2 sec
+
     const timeout = setTimeout(() => {
       gsap.fromTo(
         textRef.current,
@@ -73,7 +76,7 @@ export default function Home() {
       for (let i = 0; i <= sloganText.length; i++) {
         timeline.to(sloganRef.current, {
           textContent: scrambleText(sloganText, i),
-          duration: .02,
+          duration: 0.02,
           ease: "none",
         });
       }
@@ -88,7 +91,10 @@ export default function Home() {
         ease: "power2.out",
       });
 
-    }, 2000);
+      // Set isVisit to true after the first visit
+      localStorage.setItem("isVisit", "true");
+
+    }, delay);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -108,8 +114,9 @@ export default function Home() {
     { width: "40vw", height: "70vh" },
     { width: "20vw", height: "70vh" },
   ];
+  //imageref
+  useEffect(() => {
 
-  useLayoutEffect(() => {
     imageRefs.forEach((ref, index) => {
       if (ref.current) {
         gsap.to(ref.current, {
@@ -128,12 +135,15 @@ export default function Home() {
       }
     });
 
+
+
+
     return () => {
       imageRefs.forEach((ref) => {
         if (ref.current) ScrollTrigger.getById(ref.current)?.kill();
       });
     };
-  }, []);
+  }, [isMobile]);
 
   //screen size
   useEffect(() => {
@@ -184,21 +194,21 @@ export default function Home() {
 
   const scrollDown = () => {
     window.scrollTo({
-      top: window.innerHeight,
+      top: window.innerHeight * 0.7,
       behavior: "smooth",
     });
   };
 
   return (
     <>
-      <div className="flex items-center justify-center w-full bg-white text-black px-2 pt-[14rem] pb-[2rem]">
+      <div className="flex items-center justify-center w-full bg-white text-black px-2 pt-[13rem] pb-[2rem]">
         <h1 ref={textRef} className="text-5xl sm:text-5xl md:text-8xl lg:text-[130px] font-bold opacity-0 text-center cursor-blur-hover">
           Bab-Al-Rayan
         </h1>
       </div>
 
       <div className="flex flex-col justify-center items-center w-full pb-[12rem]">
-        <div ref={sloganRef} className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-light text-center pb-[12rem]">
+        <div ref={sloganRef} className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-light text-center pb-[12rem] overflow-x-hidden opacity-0">
           Powering Industries with <br /> Strength, Precision, and Reliability.
         </div>
 

@@ -1,11 +1,22 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import styles from "./cursor.module.css";
 
 const CustomCursor = () => {
     const cursorRef = useRef(null);
     const loaderRef = useRef(null);
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsMobile(window.innerWidth < 900);
+        };
+
+        checkScreenSize();
+        window.addEventListener("resize", checkScreenSize);
+
+        return () => window.removeEventListener("resize", checkScreenSize);
+    }, [isMobile]);
 
     useEffect(() => {
         const cursor = cursorRef.current;
@@ -55,7 +66,7 @@ const CustomCursor = () => {
                 el.removeEventListener("mouseleave", handleMouseLeave);
             });
         };
-    }, []);
+    }, [isMobile]);
 
     return (
         <>
