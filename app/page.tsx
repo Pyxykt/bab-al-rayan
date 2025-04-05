@@ -167,7 +167,7 @@ export default function Home() {
 
     let hasRevealed = false; // Trac animation triggered
 
-    document.querySelectorAll(".reveal").forEach((text, index) => {
+    document.querySelectorAll(".reveal").forEach((text) => {
       if (text instanceof HTMLElement) {
         const splitText = new SplitType(text, { types: "words" });
         const section = text.closest("section");
