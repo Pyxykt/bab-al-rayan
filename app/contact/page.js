@@ -140,7 +140,7 @@ const About = () => {
         <>
             <div className="flex items-center justify-center w-full bg-white text-black px-2 pt-[14rem] pb-[2rem]">
                 <h1 ref={textRef} className="text-5xl sm:text-5xl md:text-8xl lg:text-[150px] font-bold opacity-0 text-center cursor-blur-hover">
-                    contact us
+                    Contact us
                 </h1>
             </div>
 

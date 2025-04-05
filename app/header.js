@@ -10,10 +10,10 @@ import logo from "./companylogo.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const menuLinks = [
-    { path: "/", label: "    home" },
-    { path: "/about", label: "    about" },
-    { path: "/product", label: "    product" },
-    { path: "/contact", label: "    contact" }
+    { path: "/", label: " Home" },
+    { path: "/about", label: "    About" },
+    { path: "/product", label: "Product" },
+    { path: "/contact", label: "Contact" }
 ];
 
 const Header = () => {
@@ -154,7 +154,7 @@ const Header = () => {
                 <div ref={menuOverlay} className="menu-overlay">
                     <div className="menu-overlay-bar">
                         <div className="menu-logo">
-                            <Link href="/">homepage</Link>
+                            <Link href="/">Homepage</Link>
                         </div>
                         <div className="menu-close" onClick={toggleMenu}>
                             <p>Close</p>
@@ -188,22 +188,22 @@ const Header = () => {
                 <div className="menu-links-l">
                     <div className="menu-link-item-l cursor-blur-hover font">
                         <Link href="/" className="menu-link-l font-bold">
-                            <span ref={homeRef}>home</span>
+                            <span ref={homeRef}>Home</span>
                         </Link>
                     </div>
                     <div className="menu-link-item-l cursor-blur-hover">
                         <Link href="/about" className="menu-link-l font-bold">
-                            <span ref={aboutRef}>about</span>
+                            <span ref={aboutRef}>About</span>
                         </Link>
                     </div>
                     <div className="menu-link-item-l cursor-blur-hover">
                         <Link href="/product" className="menu-link-l font-bold">
-                            <span ref={productRef}>product</span>
+                            <span ref={productRef}>Product</span>
                         </Link>
                     </div>
                     <div className="menu-link-item-l cursor-blur-hover">
                         <Link href="/contact" className="menu-link-l font-bold">
-                            <span ref={contactRef}>contact</span>
+                            <span ref={contactRef}>Contact</span>
                         </Link>
                     </div>
                 </div>

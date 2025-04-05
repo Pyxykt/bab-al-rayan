@@ -11,6 +11,14 @@
     z-index: 1;
 }
 
+.menu-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .menu-bar a {
     color: rgb(158, 47, 47);
     cursor: pointer;
@@ -95,11 +103,16 @@
 .menu-link-item {
     width: max-content;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    justify-content: center;
+    align-items: center;
 }
+
 
 
 .menu-link-item-holder {
     position: relative;
+    padding: 20px;
+
 }
 
 .menu-link-item-holder a {
@@ -154,7 +167,7 @@
     }
 
     .menu-copy {
-        padding-top: 8em;
+        padding-top: 5em;
         align-items: center;
         justify-content: center;
         /* transform: scale(2) */

@@ -152,7 +152,7 @@ const About = () => {
                     />
                     <p className="overlay-text">
                         <span className="text-4xl text-center flex flex-col items-center justify-center">CORE VALUES</span><br />
-                        <span className="text-lg md:text-xl lg:text-2xl max-w-xl md:max-w-2xl lg:max-w-8xl">
+                        <span className="text-sm md:text-xl lg:text-2xl max-w-xl md:max-w-2xl lg:max-w-8xl">
                             <span className="">Innovation:</span> Constantly advancing our product offerings through technology and research. <br />
                             <span className="font-semibold">Reliability:</span> Delivering consistent, high-performance solutions. <br />
                             <span className="font-semibold">Sustainability:</span> Promoting eco-friendly practices and reducing carbon footprints. <br />

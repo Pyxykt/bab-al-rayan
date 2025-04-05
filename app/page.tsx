@@ -36,6 +36,7 @@ import Lenis from '@studio-freight/lenis';
 import SplitType from 'split-type';
 
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -157,30 +158,43 @@ export default function Home() {
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  //text reveal
+  // text reveal
   useEffect(() => {
-    const lenis = new Lenis({ lerp: 0.07, });
+    const lenis = new Lenis({ lerp: 0.07 });
 
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
 
-    document.querySelectorAll(".reveal").forEach((text) => {
+    let hasRevealed = false; // Trac animation triggered
+
+    document.querySelectorAll(".reveal").forEach((text, index) => {
       if (text instanceof HTMLElement) {
         const splitText = new SplitType(text, { types: "words" });
         const section = text.closest("section");
 
-        gsap.from(splitText.words, {
-          opacity: 0,
-          y: isMobile ? 10 : 20,
-          ease: "power2.out",
-          stagger: isMobile ? 0.05 : 1,
-          duration: 4,
-          scrollTrigger: {
-            trigger: section,
-            start: isMobile ? "top 8%" : "top top",
-            end: isMobile ? "bottom center" : `+=${window.innerHeight * 5}px`,
-            scrub: true,
-            pin: true,
+        ScrollTrigger.create({
+          trigger: section,
+          start: isMobile ? "top 80%" : "top 10%",
+          once: true, // Ensures it runs once
+
+          onEnter: () => {
+            if (!hasRevealed) {
+              hasRevealed = true; // Set flag to prevent re-triggerig
+
+              gsap.from(splitText.words, {
+                opacity: 0,
+                ease: 'none',
+                stagger: 1,
+                duration: 5,
+                scrollTrigger: {
+                  trigger: section,
+                  start: 'top top',
+                  end: () => `+=${window.innerHeight * 5}px`,
+                  scrub: true,
+                  pin: true,
+                }
+              });
+            }
           },
         });
       }
@@ -190,6 +204,9 @@ export default function Home() {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, [isMobile]);
+
+
+
 
 
 
@@ -214,13 +231,13 @@ export default function Home() {
         </div>
 
         {/* large screen images */}
-        {!isMobile && (<div className="flex justify-center items-center gap-x-20">
+        {!isMobile && (<div className="flex justify-center items-center gap-x-20 ml-[55px] mr-[55px]">
           {[
             "https://images.pexels.com/photos/87236/pexels-photo-87236.jpeg",
             "https://www.eqimg.com/images/2024/1920x1080/10262024-image1-equitymaster.jpg",
             "https://images.pexels.com/photos/87236/pexels-photo-87236.jpeg",
           ].map((src, index) => (
-            <div key={index} className="mt-4 ml-0 mr-0 " >
+            <div key={index} className="mt-4 ml-0 mr-0" >
               <Image
                 ref={imageRefs[index]}
                 src={src}
@@ -228,7 +245,7 @@ export default function Home() {
                 layout="intrinsic"
                 width={1000}
                 height={1000}
-                className="rounded-lg object-cover h-[50px] w-[50px]"
+                className="rounded-[25px] object-cover h-[50px] w-[50px]"
               />
             </div>
           ))}
@@ -237,13 +254,13 @@ export default function Home() {
         {/* small screen images */}
         {isMobile && (
 
-          <div className="flex flex-col justify-center items-center gap-x-20">
+          <div className="flex flex-col justify-center items-center gap-x-20 ">
             {[
               "https://images.pexels.com/photos/87236/pexels-photo-87236.jpeg",
               "https://www.eqimg.com/images/2024/1920x1080/10262024-image1-equitymaster.jpg",
               "https://images.pexels.com/photos/87236/pexels-photo-87236.jpeg",
             ].map((src, index) => (
-              <div key={index} className="mt-4 ml-0 mr-0 " >
+              <div key={index} className="mt-6 ml-6 mr-6 " >
                 <Image
                   //ref={imageRefs[index]}
                   src={src}
@@ -259,10 +276,9 @@ export default function Home() {
 
         )}
 
-
-        <div className="w-full mt-20 text-center text-lg sm:text-xl md:text-2xl lg:text-2xl opacity-1 bg-white text-black rounded-lg ">
+        <div className="w-full mt-0 text-center text-lg sm:text-xl md:text-2xl lg:text-2xl opacity-1 bg-white text-black rounded-lg ">
           <section className="flex items-center justify-center min-h-auto">
-            <p className="p-[5rem]  pb-[0rem] pt-[7rem] reveal ">
+            <p className="p-[5rem]  pb-[5rem] pt-[5rem] sm:pt-[1rem] md:pt-[7rem] lg:pt-[7rem] reveal ">
 
               <strong>BAB AL RAYAN DIESEL FUEL TRADING L.L.C</strong> is a trusted leader in the supply and distribution of high-quality diesel fuel and related products.
               With a strong commitment to providing reliable fuel solutions, we serve a broad range of industries, including transportation, construction, agriculture, and power generation.
@@ -273,6 +289,7 @@ export default function Home() {
             </p>
           </section>
         </div>
+        {/* <Overview /> */}
       </div>
 
 
