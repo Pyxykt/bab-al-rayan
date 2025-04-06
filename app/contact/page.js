@@ -22,6 +22,17 @@ const About = () => {
         return scrambled;
     };
 
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsMobile(window.innerWidth < 768); // You can adjust breakpoint
+        };
+        checkScreenSize();
+        window.addEventListener("resize", checkScreenSize);
+        return () => window.removeEventListener("resize", checkScreenSize);
+    }, []);
+
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -219,19 +230,26 @@ const About = () => {
             </div>
 
             <div className=" flex items-center justify-center w-full bg-white text-black px-2 pt-[2rem] pb-[2rem] sm:pb-[2rem] md:pb-[2rem] lg:pb-[2rem] xl:pb-[2rem]">
-                <div className="container1">
-                    <p ref={(el) => contactRefs.current[0] = el} className="slide-right">
-                        📍 Address: H.676, Murat Birag, Shad-Al-Rak, Dubai
-                    </p>
+                {!isMobile ? (
+                    // Large scren
+                    <div className="container1">
+                        <p ref={(el) => contactRefs.current[0] = el} className="slide-right">
+                            📍 Address: H.676, Murat Birag, Shad-Al-Rak, Dubai
+                        </p>
+                        <p ref={(el) => contactRefs.current[1] = el} className="slide-left">
+                            ✉️ Email: babalrayandiesel@gmail.com
+                        </p>
+                        <p ref={(el) => contactRefs.current[2] = el} className="slide-right">
+                            📞 Phone: +971 508200464
+                        </p>
+                    </div>
+                ) : (
+                    // Small screen
+                    <p className='items-center justify-center text-center'>📍 Address: H.676, Murat Birag, Shad-Al-Rak, Dubai1 <br />✉️ Email: babalrayandiesel@gmail.com <br /> 📞 Phone: +971 508200464</p>
 
-                    <p ref={(el) => contactRefs.current[1] = el} className="slide-left">
-                        ✉️ Email: babalrayandiesel@gmail.com
-                    </p>
 
-                    <p ref={(el) => contactRefs.current[2] = el} className="slide-right">
-                        📞 Phone: +971 508200464
-                    </p>
-                </div>
+                )}
+
             </div>
 
             <div style={{ flex: "7", minWidth: "60%" }}>
